@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+
 	args := os.Args[1:]
 
 	if len(args) != 1 {
@@ -16,7 +17,7 @@ func main() {
 		} else {
 			fmt.Println("Please enter a string to print.")
 		}
-		os.Exit(1)
+		return
 	}
 
 	input := args[0]
@@ -51,13 +52,20 @@ func main() {
 	// Each character has an empty line before and after the 8 lines
 	linesPerCharacter := numLinesPerChar + spaceBetweenChars // 1 empty line before and after the 8 lines
 
-	lines := strings.Split(input, "\n")
+	lines := strings.Split(input, "\\n")
 
 	for _, line := range lines {
 		// Loop over the 8 lines for each character row
+		if len(lines) > 0 {
+			print("s")
+		
 		for i := 0; i < numLinesPerChar; i++ {
 			// Loop over each character in the line
 			for _, char := range line {
+				if char < 32 || char > 126 {
+					fmt.Println("Not valid character")
+					return
+				}
 				asciiIndex := int(char) - startChar // Find the index of the character in the file
 				lineIndex := asciiIndex*linesPerCharacter + spaceBetweenChars + i // Account for empty lines
 
@@ -69,6 +77,7 @@ func main() {
 			}
 			fmt.Println() // Newline after each row of characters
 		}
-		fmt.Println() // Extra newline after processing each line in the input
+	}
+		// Extra newline after processing each line in the input
 	}
 }
