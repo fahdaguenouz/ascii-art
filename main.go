@@ -22,10 +22,6 @@ func main() {
 	}
 
 	input := args[0]
-	result, err := asciiart.PrintAsciiArt(input)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
+	result := asciiart.PrintAsciiArt(input)
 	fmt.Print(result)
 }

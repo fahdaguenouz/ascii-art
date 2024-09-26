@@ -30,11 +30,7 @@ func TestPrintAsciiArt(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			result, err := asciiart.PrintAsciiArt(tt.input)
-			if (err != nil) != tt.expectErr {
-				t.Errorf("PrintAsciiArt() error = %v, expectErr %v", err, tt.expectErr)
-				return
-			}
+			result := asciiart.PrintAsciiArt(tt.input)
 			// Trim the result for comparison
 			result = strings.TrimSpace(result)
 			expected := strings.TrimSpace(tt.expected)

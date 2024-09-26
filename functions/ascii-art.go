@@ -7,9 +7,10 @@ import (
 	"strings"
 )
 
-func PrintAsciiArt(input string) (string, error) {
+func PrintAsciiArt(input string) string {
 	if input == "" {
-		return "", fmt.Errorf("Please enter a string to print.")
+		 fmt.Printf("Please enter a string to print.")
+		 return "" 
 	}
 
 	fileName := "./art/standard.txt"
@@ -17,7 +18,8 @@ func PrintAsciiArt(input string) (string, error) {
 	// Open the ASCII art file
 	file, err := os.Open(fileName)
 	if err != nil {
-		return "", fmt.Errorf("Error opening the file: %v", err)
+		 fmt.Printf("Error opening the file: %v", err)
+		 return  ""
 	}
 	defer file.Close()
 
@@ -28,7 +30,8 @@ func PrintAsciiArt(input string) (string, error) {
 	}
 
 	if err := scanner.Err(); err != nil {
-		return "", fmt.Errorf("Error reading the file: %v", err)
+		fmt.Printf("Error reading the file: %v", err)
+		return ""
 	}
 
 	var result string
@@ -44,7 +47,8 @@ func PrintAsciiArt(input string) (string, error) {
 			for _, r := range line {
 				// Ensure the character is within the valid ASCII range
 				if r < 32 || r > 126 {
-					return "", fmt.Errorf("Please enter a valid character between ascii code 32 and 126")
+					 fmt.Printf("Please enter a valid character between ascii code 32 and 126")
+					 return  ""
 				}
 				index := 9*(int(r)-32) + i
 				result += asciiArt[index]
@@ -52,5 +56,5 @@ func PrintAsciiArt(input string) (string, error) {
 			result += "\n" // Add newline after finishing the current row of the line
 		}
 	}
-	return result, nil
+	return result
 }
